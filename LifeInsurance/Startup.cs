@@ -1,3 +1,4 @@
+using LifeInsurance.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -25,6 +26,9 @@ namespace LifeInsurance
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            //Add custom services
+            services.AddScoped<IOccupationService, OccupationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
