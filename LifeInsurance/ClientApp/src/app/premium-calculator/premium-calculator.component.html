@@ -10,25 +10,23 @@
 </ul>
 
 
-<form [formGroup]="premiumCalculatorForm" (ngSubmit)="calculatePremium()">
+<form #premiumCalculatorForm="ngForm" (ngSubmit)="onSubmit()">
   <div class="form-group row">
     <label for="staticEmail" class="col-sm-3 col-form-label">Name*</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control" id="name" placeholder="name" formControlName="name">
+      <input type="text" class="form-control" id="name" placeholder="name" name="name" #name="ngModel" [(ngModel)]="model.name" required>
     </div>
   </div>
   <div class="form-group row">
     <label for="inputPassword" class="col-sm-3 col-form-label">Date of Birth*</label>
     <div class="col-sm-4">
-      <input type="date"  min="{{beginDate}}" max="{{endDate}}" class="form-control" placeholder="yyyy-mm-dd"
-             name="dp" formControlName="dateOfBirth">
+      <input type="date" min="{{beginDate}}" max="{{endDate}}" class="form-control" placeholder="yyyy-mm-dd" [(ngModel)]="model.dateOfBirth" name="dateOfBirth" required>
     </div>
   </div>
   <div class="form-group row">
     <label for="occupation" class="col-sm-3 col-form-label">Occupation*</label>
     <div class="col-sm-4">
-      <select class="custom-select" formControlName="occupation">
-        <option disabled selected value="0">select occupation</option>
+      <select class="custom-select" [(ngModel)]="model.occupation" name="occupation" (change)="onOccupationChange(premiumCalculatorForm.form.valid)" required>
         <option *ngFor="let occupation of occupations" [value]="occupation.rating">{{occupation.name}}</option>
       </select>
     </div>
@@ -40,7 +38,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">$</span>
         </div>
-        <input type="text" class="form-control" placeholder="sum insured" formControlName="sumInsured">
+        <input type="text" class="form-control" placeholder="sum insured" [(ngModel)]="model.sumInsured" name="sumInsured" required>
         <div class="input-group-append">
           <span class="input-group-text">.00</span>
         </div>
@@ -48,7 +46,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <button class="btn btn-primary col-sm-7" [disabled]="!premiumCalculatorForm.valid" type="submit">Calculate</button>
+    <button class="btn btn-primary col-sm-7" [disabled]="!premiumCalculatorForm.form.valid" type="submit">Calculate</button>
   </div>
 </form>
 
