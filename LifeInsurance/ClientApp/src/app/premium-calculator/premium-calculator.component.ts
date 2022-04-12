@@ -27,7 +27,11 @@ export class PremiumCalculatorComponent implements OnInit {
     this.monthlyPremium = 0;
     this.setMinMaxDate();
   }
-  
+
+  currencyInputChanged(value) {
+    return Number(value.replace(/[$,]/g, ""));
+  }
+
   private setMinMaxDate() {
     this.beginDate = new Date();
     this.beginDate.setFullYear(this.beginDate.getFullYear() - 70);
@@ -50,4 +54,3 @@ export class PremiumCalculatorComponent implements OnInit {
     }
   }
 }
-
