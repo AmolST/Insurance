@@ -28,7 +28,7 @@ export class PremiumCalculatorComponent implements OnInit {
     this.setMinMaxDate();
   }
 
-  currencyInputChanged(value) {
+  private currencyInputChanged(value) {
     return Number(value.replace(/[$,]/g, ""));
   }
 
@@ -42,12 +42,12 @@ export class PremiumCalculatorComponent implements OnInit {
     this.endDate = this.datePipe.transform(this.endDate, 'yyyy-MM-dd');
   }
 
-  public onSubmit() {
+  private onSubmit() {
     this.premiumCalService.calculatePremium(this.model)
       .subscribe(result => this.monthlyPremium = result, error => console.error(error));
   }
 
-  public onOccupationChange(isFormValid) {
+  private onOccupationChange(isFormValid) {
     if (isFormValid) {
       this.premiumCalService.calculatePremium(this.model)
         .subscribe(result => this.monthlyPremium = result, error => console.error(error));
